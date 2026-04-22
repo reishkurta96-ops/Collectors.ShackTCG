@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Collector's Shack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="images/logo.png" alt="Collector's Shack Logo" class="logo-image">
+            </div>
+            <ul class="nav-links">
+                <li><a href="products.html">View Store</a></li>
+            </ul>
+            <div class="user-section">
+                <span class="user-name">Admin</span>
+                <button class="logout-btn" onclick="adminLogout()">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="admin-section">
+        <div class="admin-container">
+            <h1>Admin Panel</h1>
+            <p class="admin-subtitle">Manage your products and inventory</p>
+
+            <!-- Add New Product Button -->
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button class="add-product-btn" onclick="showAddProductForm()">+ Add New Product</button>
+                <button class="add-product-btn" style="background: #007bff;" onclick="showCategoryManager()">Manage Categories</button>
+                <button class="add-product-btn" style="background: #28a745;" onclick="showPurchaseHistory()">All Orders</button>
+            </div>
+
+            <!-- Add/Edit Product Form -->
+            <div class="admin-card" id="productFormCard" style="display: none;">
+                <h2 id="formTitle">Add New Product</h2>
+                <form id="productForm" class="admin-form">
+                    <input type="hidden" id="productId">
+                    
+                    <div class="form-group">
+                        <label for="productName">Product Name</label>
+                        <input type="text" id="productName" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productPrice">Price ($)</label>
+                            <input type="number" id="productPrice" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productStock">Stock Quantity</label>
+                            <input type="number" id="productStock" min="0" value="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productCategory">Category</label>
+                            <select id="productCategory" required>
+                                <option value="">Select Category</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="productSubcategory">Subcategory</label>
+                            <select id="productSubcategory" required>
+                                <option value="">Select Subcategory</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productIcon">Product Icon (Emoji, shown when no image)</label>
+                        <input type="text" id="productIcon" placeholder="e.g. 📦" maxlength="4" value="📦">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productImage">Product Image</label>
+                        <input type="file" id="productImage" accept="image/*">
+                        <small>Upload a product image (JPG, PNG, GIF)</small>
+                    </div>
+                    
+                    <!-- Image Preview -->
+                    <div class="form-group" id="imagePreviewContainer" style="display: none;">
+                        <label>Image Preview:</label>
+                        <img id="imagePreview" src="" alt="Preview" style="max-width: 200px; max-height: 200px; border: 2px solid #ffffe0; border-radius: 8px;">
+                        <button type="button" onclick="removeImage()" style="display: block; margin-top: 0.5rem; padding: 0.5rem 1rem; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer;">Remove Image</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="productDescription">Description (Optional)</label>
+                        <textarea id="productDescription" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="productInStock" checked>
+                            In Stock
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">Save Product</button>
+                        <button type="button" class="cancel-btn" onclick="hideProductForm()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Category Manager -->
+            <div class="admin-card" id="categoryManagerCard" style="display: none;">
+                <h2>Category & Subcategory Manager</h2>
+                
+                <!-- Add New Category -->
+                <div style="margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 2px solid #ffffe0;">
+                    <h3 style="margin-bottom: 1rem; color: #333;">Add New Category</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="newCategoryId">Category ID (lowercase, no spaces)</label>
+                            <input type="text" id="newCategoryId" placeholder="e.g., digimon">
+                        </div>
+                        <div class="form-group">
+                            <label for="newCategoryName">Category Display Name</label>
+                            <input type="text" id="newCategoryName" placeholder="e.g., Digimon">
+                        </div>
+                    </div>
+                    <button onclick="addNewCategory()" style="padding: 0.8rem 1.5rem; background: #28a745; color: white; border: 2px solid #ffffe0; border-radius: 8px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600;">Add Category</button>
+                </div>
+
+                <!-- Add New Subcategory -->
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="margin-bottom: 1rem; color: #333;">Add New Subcategory</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="subcatCategory">Select Category</label>
+                            <select id="subcatCategory">
+                                <option value="">Select Category</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="newSubcategoryId">Subcategory ID (lowercase, use hyphens)</label>
+                            <input type="text" id="newSubcategoryId" placeholder="e.g., booster-packs">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="newSubcategoryName">Subcategory Display Name</label>
+                        <input type="text" id="newSubcategoryName" placeholder="e.g., Booster Packs">
+                    </div>
+                    <button onclick="addNewSubcategory()" style="padding: 0.8rem 1.5rem; background: #28a745; color: white; border: 2px solid #ffffe0; border-radius: 8px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600;">Add Subcategory</button>
+                </div>
+
+                <!-- Current Categories Display -->
+                <div>
+                    <h3 style="margin-bottom: 1rem; color: #333;">Current Categories & Subcategories</h3>
+                    <div id="categoriesDisplay"></div>
+                </div>
+
+                <button onclick="hideCategoryManager()" style="width: 100%; margin-top: 1.5rem; padding: 1rem; background: #6c757d; color: white; border: 2px solid #ffffe0; border-radius: 8px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600;">Close</button>
+            </div>
+
+            <!-- Admin Purchase History -->
+            <div class="admin-card" id="adminPurchaseHistoryCard" style="display: none;">
+                <h2>All Customer Orders</h2>
+                <div class="order-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                    <div style="background: #d4edda; padding: 1.5rem; border-radius: 10px; text-align: center; border: 2px solid #28a745;">
+                        <div style="font-size: 2rem; font-weight: bold; color: #155724;" id="totalOrders">0</div>
+                        <div style="color: #155724; font-weight: 600;">Total Orders</div>
+                    </div>
+                    <div style="background: #d1ecf1; padding: 1.5rem; border-radius: 10px; text-align: center; border: 2px solid #17a2b8;">
+                        <div style="font-size: 2rem; font-weight: bold; color: #0c5460;" id="totalRevenue">$0.00</div>
+                        <div style="color: #0c5460; font-weight: 600;">Total Revenue</div>
+                    </div>
+                    <div style="background: #fff3cd; padding: 1.5rem; border-radius: 10px; text-align: center; border: 2px solid #ffc107;">
+                        <div style="font-size: 2rem; font-weight: bold; color: #856404;" id="totalCustomers">0</div>
+                        <div style="color: #856404; font-weight: 600;">Total Customers</div>
+                    </div>
+                </div>
+                <div id="adminOrdersDisplay"></div>
+                <button onclick="hideAdminPurchaseHistory()" style="width: 100%; margin-top: 1.5rem; padding: 1rem; background: #6c757d; color: white; border: 2px solid #ffffe0; border-radius: 8px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 600;">Close</button>
+            </div>
+
+            <!-- Products List -->
+            <div class="admin-card">
+                <h2>All Products</h2>
+                <div class="products-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody">
+                            <!-- Products will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h3>Collector's Shack</h3>
+        <p>Your trusted source for Trading Card Games</p>
+        <p>Email: info@collectorsshack.com | Phone: (555) 123-4567</p>
+        <p>&copy; 2026 Collector's Shack. All rights reserved.</p>
+    </footer>
+
+    <script src="js/notifications.js"></script>
+    <script src="js/admin-panel.js"></script>
+</body>
+</html>

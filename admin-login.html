@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Collector's Shack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Collector's Shack Logo" class="logo-image">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="auth-section">
+        <div class="auth-container">
+            <h1>Admin Login</h1>
+            <p class="auth-subtitle">Access the admin panel</p>
+
+            <form id="adminLoginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="adminEmail">Admin Email</label>
+                    <input type="email" id="adminEmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="adminPassword">Admin Password</label>
+                    <input type="password" id="adminPassword" required>
+                </div>
+
+                <button type="submit" class="auth-btn">Login as Admin</button>
+            </form>
+
+            <p class="auth-footer" style="margin-top: 2rem; font-size: 0.9rem; color: #666;">
+                Contact your system administrator if you have lost your credentials.
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <h3>Collector's Shack</h3>
+        <p>Your trusted source for Trading Card Games</p>
+        <p>Email: info@collectorsshack.com | Phone: (555) 123-4567</p>
+        <p>&copy; 2026 Collector's Shack. All rights reserved.</p>
+    </footer>
+
+    <script src="js/notifications.js"></script>
+    <script src="js/admin-auth.js"></script>
+</body>
+</html>

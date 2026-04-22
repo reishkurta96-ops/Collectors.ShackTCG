@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - Collector's Shack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Collector's Shack Logo" class="logo-image">
+                </a>
+            </div>
+            <ul class="nav-links" id="categoryNavLinks">
+                <li><a href="products.html">Back to Shop</a></li>
+                <li><a href="profile.html">My Profile</a></li>
+            </ul>
+            
+            <div class="user-section" id="userSection">
+                <div class="user-dropdown">
+                    <span class="user-name" id="userName" onclick="toggleUserMenu()"></span>
+                    <div class="user-menu" id="userMenu">
+                        <a href="profile.html">My Profile</a>
+                        <a href="order-history.html">Order History</a>
+                        <a href="#" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+                <div class="cart-icon" onclick="window.location.href='products.html'">
+                    Cart
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="profile-section">
+        <div class="profile-container">
+            <h1>📦 Order History</h1>
+            
+            <div class="profile-card">
+                <div id="purchaseHistory">
+                    <!-- Orders will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h3>Collector's Shack</h3>
+        <p>Your trusted source for Trading Card Games</p>
+        <p>Email: info@collectorsshack.com | Phone: (555) 123-4567</p>
+        <p>&copy; 2026 Collector's Shack. All rights reserved.</p>
+    </footer>
+
+    <script src="js/order-history.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collector's Shack - Choose Your Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="welcome-page">
+    <!-- Welcome Popup Modal -->
+    <div class="welcome-modal" id="welcomeModal">
+        <div class="welcome-content">
+            <img src="images/logo.png" alt="Collector's Shack Logo" class="welcome-logo">
+            <h1>Welcome to the Shack!</h1>
+            <p>Choose your TCG</p>
+            
+            <div class="tcg-options">
+                <div class="tcg-option" onclick="goToProducts('yugioh')">
+                    <img src="images/yugioh-card-back.png" alt="Yu-Gi-Oh!" class="card-back-image">
+                    <div class="tcg-overlay">
+                        <h3>Yu-Gi-Oh!</h3>
+                    </div>
+                </div>
+                
+                <div class="tcg-option" onclick="goToProducts('pokemon')">
+                    <img src="images/pokemon-card-back.png" alt="Pokémon" class="card-back-image">
+                    <div class="tcg-overlay">
+                        <h3>Pokémon</h3>
+                    </div>
+                </div>
+                
+                <div class="tcg-option" onclick="goToProducts('magic')">
+                    <img src="images/magic-card-back.png" alt="Magic: The Gathering" class="card-back-image">
+                    <div class="tcg-overlay">
+                        <h3>Magic: The Gathering</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="browse-all-btn-full" onclick="goToProducts('all')">Browse All Products</button>
+        </div>
+    </div>
+
+    <script>
+        function goToProducts(category) {
+            window.location.href = 'products.html?filter=' + category;
+        }
+    </script>
+</body>
+</html>

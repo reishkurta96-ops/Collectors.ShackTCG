@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Collector's Shack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Collector's Shack Logo" class="logo-image">
+                </a>
+            </div>
+            <ul class="nav-links" id="categoryNavLinks">
+                <li><a href="products.html">Back to Shop</a></li>
+                <li><a href="order-history.html">Order History</a></li>
+            </ul>
+            
+            <div class="user-section" id="userSection">
+                <div class="user-dropdown">
+                    <span class="user-name" id="userName" onclick="toggleUserMenu()"></span>
+                    <div class="user-menu" id="userMenu">
+                        <a href="profile.html">My Profile</a>
+                        <a href="order-history.html">Order History</a>
+                        <a href="#" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+                <div class="cart-icon" onclick="window.location.href='products.html'">
+                    Cart
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="profile-section">
+        <div class="profile-container">
+            <h1>My Profile</h1>
+            
+            <!-- Profile Picture -->
+            <div class="profile-card">
+                <h2>Profile Picture</h2>
+                <div class="profile-picture-section">
+                    <div class="profile-picture-preview">
+                        <img id="profilePicPreview" src="" alt="Profile Picture" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22%3E%3Ccircle cx=%2275%22 cy=%2275%22 r=%2275%22 fill=%22%23dc143c%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2260%22 fill=%22white%22 font-family=%22Arial%22%3E%F0%9F%91%A4%3C/text%3E%3C/svg%3E'">
+                    </div>
+                    <div>
+                        <input type="file" id="profilePicture" accept="image/*" style="display: none;">
+                        <button onclick="document.getElementById('profilePicture').click()" class="upload-btn">Upload New Picture</button>
+                        <button onclick="removeProfilePicture()" class="remove-btn">Remove Picture</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personal Information -->
+            <div class="profile-card">
+                <h2>Personal Information</h2>
+                <form id="profileForm" class="profile-form">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone">
+                    </div>
+
+                    <button type="submit" class="save-btn">Save Changes</button>
+                </form>
+            </div>
+
+            <!-- Change Password -->
+            <div class="profile-card">
+                <h2>Change Password</h2>
+                <form id="passwordForm" class="profile-form">
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" id="currentPassword" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" required minlength="6">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmNewPassword">Confirm New Password</label>
+                        <input type="password" id="confirmNewPassword" required>
+                    </div>
+
+                    <button type="submit" class="save-btn">Update Password</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h3>Collector's Shack</h3>
+        <p>Your trusted source for Trading Card Games</p>
+        <p>Email: info@collectorsshack.com | Phone: (555) 123-4567</p>
+        <p>&copy; 2026 Collector's Shack. All rights reserved.</p>
+    </footer>
+
+    <script src="js/profile.js"></script>
+</body>
+</html>

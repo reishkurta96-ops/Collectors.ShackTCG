@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Collector's Shack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Collector's Shack Logo" class="logo-image">
+                </a>
+            </div>
+            <ul class="nav-links" id="categoryNavLinks">
+                <!-- Categories will be loaded dynamically -->
+            </ul>
+            
+            <!-- Auth buttons (shown when NOT logged in) -->
+            <div class="auth-buttons" id="authButtons">
+                <a href="signup.html" class="auth-link">Sign Up</a>
+                <a href="login.html" class="auth-link">Login</a>
+            </div>
+            
+            <!-- User info and cart (shown when logged in) -->
+            <div class="user-section" id="userSection" style="display: none;">
+                <div class="user-dropdown">
+                    <span class="user-name" id="userName" onclick="toggleUserMenu()"></span>
+                    <div class="user-menu" id="userMenu">
+                        <a href="profile.html">My Profile</a>
+                        <a href="order-history.html">Order History</a>
+                        <a href="#" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+                <div class="cart-icon" onclick="toggleCart()">
+                    Cart
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Subcategory Bar -->
+    <div class="subcategory-bar" id="subcategoryBar">
+        <div class="subcategory-container">
+            <!-- Subcategories will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <!-- Search and Filter Bar -->
+    <div class="search-filter-bar">
+        <div class="search-filter-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search products..." onkeyup="handleSearch()">
+                <span class="search-icon">🔍</span>
+            </div>
+            
+            <div class="filter-controls">
+                <select id="sortSelect" onchange="handleSort()">
+                    <option value="default">Sort by</option>
+                    <option value="name-asc">Name (A-Z)</option>
+                    <option value="name-desc">Name (Z-A)</option>
+                    <option value="price-asc">Price (Low to High)</option>
+                    <option value="price-desc">Price (High to Low)</option>
+                    <option value="stock-desc">Stock (High to Low)</option>
+                </select>
+                
+                <select id="priceFilter" onchange="handlePriceFilter()">
+                    <option value="all">All Prices</option>
+                    <option value="0-10">Under $10</option>
+                    <option value="10-50">$10 - $50</option>
+                    <option value="50-100">$50 - $100</option>
+                    <option value="100-999999">Over $100</option>
+                </select>
+                
+                <button class="reset-filters-btn" onclick="resetFilters()">Reset Filters</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Hero - MOVED BELOW SEARCH BAR -->
+    <section class="products-hero">
+        <h1 id="categoryTitle">Our Products</h1>
+        <p>Browse our complete collection of TCG cards and accessories</p>
+    </section>
+
+    <section class="products" id="products">
+        <div class="products-count" id="productsCount"></div>
+        <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="toggleCart()">×</span>
+            <h2>Shopping Cart</h2>
+            
+            <!-- Guest Checkout Option -->
+            <div id="guestCheckoutNotice" style="display: none;">
+                <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                    <p style="margin: 0; color: #856404; font-weight: 600;">
+                        Continue as guest or <a href="login.html" style="color: #dc143c; text-decoration: underline;">login</a> for faster checkout
+                    </p>
+                </div>
+            </div>
+            
+            <div id="cartItems"></div>
+            <div class="cart-total" id="cartTotal">Total: $0.00</div>
+        </div>
+    </div>
+
+    <footer id="about">
+        <h3>Collector's Shack</h3>
+        <p>Your trusted source for Trading Card Games</p>
+        <p>Email: info@collectorsshack.com | Phone: (555) 123-4567</p>
+        <p>&copy; 2026 Collector's Shack. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
